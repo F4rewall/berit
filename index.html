@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BERIT — Grupo de Jovens</title>
+<meta name="description" content="BERIT — grupo de jovens. Fé, amizade e propósito.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --amber:#FFA500; --gold:#FFD166; --crimson:#C41E3A;
+  --bg:#0B0B0D; --card:#16161B; --line:rgba(255,165,0,.16);
+  --text:#F5F2EA; --muted:#A7A29A; --radius:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow:hidden}
+h1,h2,h3{font-family:'Montserrat',sans-serif;line-height:1.2}
+img{max-width:100%}
+::selection{background:rgba(255,165,0,.35)}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:#0e0e11}
+::-webkit-scrollbar-thumb{background:#7a5200;border-radius:4px}
+
+/* ---------- layout ---------- */
+.app{height:100vh;display:flex;flex-direction:column;position:relative;
+  background:radial-gradient(700px 380px at 50% 0%,rgba(255,165,0,.10),transparent 65%),radial-gradient(600px 400px at 90% 100%,rgba(196,30,58,.08),transparent 60%),var(--bg)}
+#stars{position:absolute;inset:0;pointer-events:none;z-index:0}
+
+/* ---------- navbar / tabs ---------- */
+.nav{position:relative;z-index:10;border-bottom:1px solid var(--line);background:rgba(11,11,13,.9);backdrop-filter:blur(14px)}
+.nav-inner{max-width:1140px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;background:none;border:none;cursor:pointer;color:var(--text);font:inherit}
+.brand img{width:42px;height:42px;object-fit:contain;filter:drop-shadow(0 0 12px rgba(255,165,0,.45))}
+.brand b{font-family:'Montserrat';font-weight:900;letter-spacing:4px;font-size:19px;background:linear-gradient(120deg,var(--amber),var(--gold) 55%,var(--crimson));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tabs{display:flex;gap:6px;background:#101014;border:1px solid var(--line);border-radius:999px;padding:5px}
+.tab{font-family:'Montserrat';font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);background:transparent;border:none;border-radius:999px;padding:10px 20px;cursor:pointer;transition:.3s;white-space:nowrap}
+.tab:hover{color:var(--gold)}
+.tab.active{color:#1a1000;background:linear-gradient(120deg,var(--amber),#E07B00);box-shadow:0 6px 20px rgba(255,165,0,.4)}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:10px;padding:9px 11px;cursor:pointer}
+.burger span{display:block;width:22px;height:2px;background:var(--amber);margin:5px 0;border-radius:2px}
+
+/* ---------- tab panels ---------- */
+.stage{position:relative;z-index:2;flex:1;overflow:hidden}
+.panel{position:absolute;inset:0;overflow-y:auto;padding:44px 24px 60px;opacity:0;transform:translateX(40px) scale(.985);pointer-events:none;transition:opacity .45s ease,transform .45s ease}
+.panel.active{opacity:1;transform:none;pointer-events:auto}
+.panel.exit-left{transform:translateX(-40px) scale(.985)}
+.wrap{max-width:1060px;margin:0 auto}
+
+/* ---------- hero (aba início) ---------- */
+.hero{text-align:center;padding-top:2vh}
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);color:var(--gold);border-radius:999px;padding:8px 20px;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;background:rgba(255,165,0,.06)}
+.logo-hero{width:180px;height:180px;object-fit:contain;margin:26px auto 6px;display:block;filter:drop-shadow(0 0 34px rgba(255,165,0,.35));animation:floaty 5s ease-in-out infinite}
+
+/* BERIT animado */
+.berit{font-size:clamp(64px,11vw,124px);font-weight:900;letter-spacing:6px;display:flex;justify-content:center;gap:.02em;perspective:600px}
+.berit span{display:inline-block;background:linear-gradient(115deg,#FFB627,#FFD166 30%,#FF6B35 55%,#C41E3A 80%,#FFB627);background-size:250% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:flipIn .8s cubic-bezier(.2,.9,.3,1.2) both,shine 4s linear infinite,glowPulse 3s ease-in-out infinite}
+.berit span:nth-child(1){animation-delay:0s,0s,0s}
+.berit span:nth-child(2){animation-delay:.08s,0s,.15s}
+.berit span:nth-child(3){animation-delay:.16s,0s,.3s}
+.berit span:nth-child(4){animation-delay:.24s,0s,.45s}
+.berit span:nth-child(5){animation-delay:.32s,0s,.6s}
+@keyframes flipIn{from{opacity:0;transform:rotateX(90deg) translateY(30px)}to{opacity:1;transform:none}}
+@keyframes shine{to{background-position:250% center}}
+@keyframes glowPulse{0%,100%{filter:drop-shadow(0 0 6px rgba(255,165,0,.35))}50%{filter:drop-shadow(0 0 22px rgba(255,165,0,.7))}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero .tag{color:var(--muted);font-size:clamp(15px,2.4vw,18px);max-width:580px;margin:14px auto 30px}
+.cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{font-family:'Montserrat';font-weight:700;font-size:13px;letter-spacing:1.5px;padding:14px 32px;border-radius:999px;text-decoration:none;border:none;cursor:pointer;transition:transform .25s,box-shadow .25s;display:inline-block}
+.btn-gold{background:linear-gradient(120deg,var(--amber),#E07B00);color:#1a1000;box-shadow:0 10px 30px rgba(255,165,0,.35)}
+.btn-gold:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 16px 40px rgba(255,165,0,.5)}
+.btn-ghost{border:1px solid rgba(255,255,255,.22);color:var(--text);background:transparent}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber);transform:translateY(-3px)}
+.verse-mini{margin:38px auto 0;max-width:640px;border:1px solid var(--line);border-radius:var(--radius);padding:22px 28px;background:rgba(255,165,0,.04)}
+.verse-mini p{font-family:'Montserrat';font-size:17px;font-weight:600}
+.verse-mini p span{color:var(--gold)}
+.verse-mini cite{display:block;margin-top:8px;color:var(--muted);font-style:normal;letter-spacing:3px;font-size:11px;text-transform:uppercase}
+
+/* ---------- generic ---------- */
+.kicker{display:inline-block;font-family:'Montserrat';font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--amber);border:1px solid var(--line);border-radius:999px;padding:7px 18px;margin-bottom:16px;background:rgba(255,165,0,.05)}
+.sec-title{font-size:clamp(26px,4vw,38px);font-weight:800;margin-bottom:10px}
+.sec-title em{font-style:normal;background:linear-gradient(120deg,var(--gold),var(--amber),var(--crimson));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sec-sub{color:var(--muted);max-width:560px;font-size:16px}
+
+/* sobre */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:30px}
+.about-card{background:linear-gradient(180deg,#17171c,#101014);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.about-card img{border-radius:12px;display:block;width:100%;aspect-ratio:4/3;object-fit:contain;background:#000}
+.about-card figcaption{color:var(--muted);font-size:12px;text-align:center;padding:12px 4px 4px;letter-spacing:2px}
+.about-text h3{font-size:24px;margin-bottom:14px}
+.about-text p{color:var(--muted);margin-bottom:12px;font-size:15.5px}
+.stats{display:flex;gap:14px;margin-top:24px}
+.stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 8px;text-align:center;transition:transform .25s,border-color .25s}
+.stat:hover{transform:translateY(-4px);border-color:rgba(255,165,0,.4)}
+.stat b{display:block;font-family:'Montserrat';font-size:32px;font-weight:900;background:linear-gradient(120deg,var(--gold),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.sched{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sched-item{background:var(--card);border:1px solid rgba(255,255,255,.07);border-left:4px solid var(--amber);border-radius:12px;padding:18px}
+.sched-item h4{font-size:14px;color:var(--gold);margin-bottom:4px}
+.sched-item p{color:var(--muted);font-size:13.5px}
+
+/* atividades */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:32px 24px;text-align:center;position:relative;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;animation:cardIn .5s ease both}
+.card:nth-child(2){animation-delay:.07s}.card:nth-child(3){animation-delay:.14s}
+.card:nth-child(4){animation-delay:.21s}.card:nth-child(5){animation-delay:.28s}.card:nth-child(6){animation-delay:.35s}
+@keyframes cardIn{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--amber),var(--crimson));transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.card:hover{transform:translateY(-8px);border-color:rgba(255,165,0,.35);box-shadow:0 24px 50px rgba(255,140,0,.10)}
+.card:hover::before{transform:scaleX(1)}
+.ico{width:60px;height:60px;margin:0 auto 16px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;background:linear-gradient(135deg,rgba(255,165,0,.18),rgba(196,30,58,.14));border:1px solid var(--line);transition:transform .3s}
+.card:hover .ico{transform:scale(1.12) rotate(-6deg)}
+.card h3{font-size:17px;margin-bottom:8px}
+.card p{color:var(--muted);font-size:14px}
+
+/* assistente (iframe do chatbot) */
+.chat-frame{margin-top:28px;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5);background:#0f0f13}
+.chat-frame iframe{width:100%;height:62vh;min-height:480px;border:none;display:block}
+
+/* contato */
+.contact-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;margin-top:30px;align-items:start}
+form{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:14px}
+label{font-family:'Montserrat';font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:6px}
+input,textarea{width:100%;background:#0e0e11;border:1px solid rgba(255,255,255,.1);border-radius:12px;color:var(--text);padding:12px 15px;font-size:15px;font-family:'Inter';outline:none;transition:border-color .25s,box-shadow .25s}
+input:focus,textarea:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(255,165,0,.15)}
+textarea{min-height:100px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ok{display:none;background:rgba(255,165,0,.1);border:1px solid rgba(255,165,0,.35);color:var(--gold);border-radius:12px;padding:13px;text-align:center;font-weight:600;font-size:14px}
+.info{display:flex;flex-direction:column;gap:12px}
+.info-item{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px;transition:border-color .25s,transform .25s}
+.info-item:hover{border-color:rgba(255,165,0,.3);transform:translateX(4px)}
+.info-item .dot{width:46px;height:46px;flex-shrink:0;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:21px;background:linear-gradient(135deg,rgba(255,165,0,.2),rgba(196,30,58,.15))}
+.info-item h4{font-size:14px}
+.info-item p{color:var(--muted);font-size:13.5px}
+
+footer{position:relative;z-index:10;border-top:1px solid rgba(255,255,255,.06);padding:14px 24px;text-align:center;color:#6b675f;font-size:12.5px;background:rgba(11,11,13,.9)}
+footer .b{font-family:'Montserrat';font-weight:900;letter-spacing:3px;background:linear-gradient(120deg,var(--amber),var(--crimson));-webkit-background-clip:text;background-clip:text;color:transparent}
+.wa{position:fixed;right:22px;bottom:64px;z-index:60;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;font-size:26px;text-decoration:none;box-shadow:0 10px 30px rgba(37,211,102,.4);transition:transform .25s}
+.wa:hover{transform:scale(1.08)}
+
+@media(max-width:900px){.about-grid,.contact-grid{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.sched{grid-template-columns:1fr}}
+@media(max-width:640px){
+  .tabs{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(11,11,13,.98);flex-direction:column;padding:14px;border-bottom:1px solid var(--line);border-radius:0}
+  .tabs.open{display:flex}
+  .tab{text-align:center;padding:13px}
+  .burger{display:block}
+  .grid,.row2{grid-template-columns:1fr}
+  .logo-hero{width:140px;height:140px}
+  .berit{letter-spacing:3px}
+  .chat-frame iframe{height:70vh;min-height:420px}
+  body{overflow:hidden}
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+<canvas id="stars"></canvas>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="brand" data-tab="inicio"><img src="logo.png" alt="BERIT"><b>BERIT</b></button>
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-tab="inicio">Início</button>
+      <button class="tab" data-tab="sobre">Quem Somos</button>
+      <button class="tab" data-tab="atividades">Atividades</button>
+      <button class="tab" data-tab="assistente">Assistente</button>
+      <button class="tab" data-tab="contato">Contato</button>
+    </div>
+    <button class="burger" id="burger" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main class="stage">
+
+  <!-- INÍCIO -->
+  <div class="panel active" id="p-inicio">
+    <div class="wrap hero">
+      <span class="badge">✦ Grupo de Jovens</span>
+      <img src="logo.png" alt="Logo BERIT — coroa de espinhos" class="logo-hero">
+      <h1 class="berit" aria-label="BERIT"><span>B</span><span>E</span><span>R</span><span>I</span><span>T</span></h1>
+      <p class="tag">Fé, amizade e propósito. Um lugar para crescer, servir e pertencer.</p>
+      <div class="cta">
+        <button class="btn btn-gold" data-tab="contato">QUERO PARTICIPAR</button>
+        <button class="btn btn-ghost" data-tab="assistente">FALAR COM O BERITBOT</button>
+      </div>
+      <div class="verse-mini">
+        <p>“Não se amoldem ao padrão deste mundo, mas <span>transformem-se</span> pela renovação da mente.”</p>
+        <cite>Romanos 12:2</cite>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUEM SOMOS -->
+  <div class="panel" id="p-sobre">
+    <div class="wrap">
+      <span class="kicker">Sobre nós</span>
+      <h2 class="sec-title">Uma <em>família</em> de jovens</h2>
+      <p class="sec-sub">O BERIT existe para reunir jovens em torno da fé, do amor e do propósito.</p>
+      <div class="about-grid">
+        <figure class="about-card">
+          <img src="logo.png" alt="Logo do grupo BERIT">
+          <figcaption>NOSSA IDENTIDADE — BERIT</figcaption>
+        </figure>
+        <div class="about-text">
+          <h3>Jovens unidos por algo maior</h3>
+          <p>Somos um grupo jovem em construção: um espaço acolhedor para expressar a fé, desenvolver talentos e criar amizades verdadeiras.</p>
+          <p>Encontros semanais, estudos bíblicos, louvor, ação social e muita comunhão.</p>
+          <div class="stats">
+            <div class="stat"><b data-count="40">0</b><span>Jovens</span></div>
+            <div class="stat"><b data-count="12">0</b><span>Eventos</span></div>
+            <div class="stat"><b data-count="4">0</b><span>Encontros/mês</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="sched">
+        <div class="sched-item"><h4>📅 Sábado · 19h</h4><p>Encontro semanal — louvor, palavra e comunhão.</p></div>
+        <div class="sched-item"><h4>📅 Quarta · 19h30</h4><p>Estudo bíblico e oração em pequenos grupos.</p></div>
+        <div class="sched-item"><h4>📅 Ação social</h4><p>Projetos solidários na comunidade todo mês.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ATIVIDADES -->
+  <div class="panel" id="p-atividades">
+    <div class="wrap">
+      <span class="kicker">O que fazemos</span>
+      <h2 class="sec-title">Nossas <em>atividades</em></h2>
+      <p class="sec-sub">Tem espaço para todo mundo. Escolha onde se envolver:</p>
+      <div class="grid">
+        <div class="card"><div class="ico">📖</div><h3>Estudos Bíblicos</h3><p>Estudo e reflexão da Palavra de forma leve e participativa.</p></div>
+        <div class="card"><div class="ico">🎵</div><h3>Louvor e Adoração</h3><p>Música e adoração para renovar o coração.</p></div>
+        <div class="card"><div class="ico">🤲</div><h3>Ação Social</h3><p>Projetos solidários para quem mais precisa.</p></div>
+        <div class="card"><div class="ico">🎮</div><h3>Gincanas e Eventos</h3><p>Jogos, noites temáticas e muita diversão.</p></div>
+        <div class="card"><div class="ico">⛰️</div><h3>Retiros</h3><p>Comunhão e reflexão em meio à natureza.</p></div>
+        <div class="card"><div class="ico">🎨</div><h3>Artes e Talentos</h3><p>Música, dança, teatro e mídia — use seus dons.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ASSISTENTE -->
+  <div class="panel" id="p-assistente">
+    <div class="wrap">
+      <span class="kicker">Assistente virtual</span>
+      <h2 class="sec-title">Converse com o <em>BeritBot</em></h2>
+      <p class="sec-sub">Tire dúvidas sobre a fé, o grupo e a vida cristã — direto aqui no site.</p>
+      <div class="chat-frame">
+        <iframe src="chatbot_cat_lico_berit.html" title="BeritBot — assistente do grupo BERIT"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTATO -->
+  <div class="panel" id="p-contato">
+    <div class="wrap">
+      <span class="kicker">Fale conosco</span>
+      <h2 class="sec-title">Faça parte do <em>BERIT</em></h2>
+      <p class="sec-sub">Preencha e entraremos em contato com você.</p>
+      <div class="contact-grid">
+        <form id="form">
+          <div class="row2">
+            <div><label>Nome</label><input type="text" placeholder="Seu nome" required></div>
+            <div><label>WhatsApp</label><input type="tel" placeholder="(00) 00000-0000"></div>
+          </div>
+          <div class="row2">
+            <div><label>E-mail</label><input type="email" placeholder="voce@email.com"></div>
+            <div><label>Idade</label><input type="number" min="12" max="99" placeholder="Sua idade"></div>
+          </div>
+          <div><label>Mensagem</label><textarea placeholder="Conte um pouco sobre você..."></textarea></div>
+          <button class="btn btn-gold" type="submit">ENVIAR MENSAGEM</button>
+          <div class="ok" id="ok">✅ Mensagem enviada! Em breve entraremos em contato.</div>
+        </form>
+        <div class="info">
+          <div class="info-item"><div class="dot">📍</div><div><h4>Onde</h4><p>Encontros semanais — fale conosco para o endereço</p></div></div>
+          <div class="info-item"><div class="dot">⏰</div><div><h4>Quando</h4><p>Sábados às 19h · Quartas às 19h30</p></div></div>
+          <div class="info-item"><div class="dot">📱</div><div><h4>Instagram</h4><p>@berit.grupo</p></div></div>
+          <div class="info-item"><div class="dot">✉️</div><div><h4>E-mail</h4><p>contato@berit.grupo</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>Feito com 💛 para o <span class="b">BERIT</span> — Grupo de Jovens · © 2026</footer>
+</div>
+
+<a class="wa" href="https://wa.me/" title="Conversar no WhatsApp">💬</a>
+
+<script>
+/* ---------- tabs (sem scroll) ---------- */
+const tabs=[...document.querySelectorAll('[data-tab]')];
+const panels={inicio:document.getElementById('p-inicio'),sobre:document.getElementById('p-sobre'),atividades:document.getElementById('p-atividades'),assistente:document.getElementById('p-assistente'),contato:document.getElementById('p-contato')};
+let current='inicio',counted=false;
+function go(name){
+  if(!panels[name]||name===current)return;
+  const old=panels[current];
+  old.classList.add('exit-left');old.classList.remove('active');
+  setTimeout(()=>old.classList.remove('exit-left'),450);
+  const p=panels[name];
+  p.scrollTop=0;p.classList.add('active');current=name;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===name));
+  document.getElementById('tabs').classList.remove('open');
+  if(name==='sobre'&&!counted){counted=true;runCounters()}
+  if(name==='inicio'){replayBerit()}
+}
+tabs.forEach(b=>b.addEventListener('click',()=>go(b.dataset.tab)));
+document.getElementById('burger').onclick=()=>document.getElementById('tabs').classList.toggle('open');
+
+/* replay BERIT animation */
+function replayBerit(){
+  const h=document.querySelector('.berit');
+  h.style.animation='none';h.querySelectorAll('span').forEach(s=>{s.style.animation='none'});
+  void h.offsetWidth;
+  h.querySelectorAll('span').forEach(s=>{s.style.animation=''});
+}
+
+/* counters */
+function runCounters(){
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const t=+el.dataset.count,s=Date.now(),d=1400;
+    (function tick(){const p=Math.min((Date.now()-s)/d,1),e=1-Math.pow(1-p,3);
+      el.textContent=Math.round(t*e);if(p<1)requestAnimationFrame(tick)})();
+  });
+}
+
+/* form */
+document.getElementById('form').addEventListener('submit',e=>{
+  e.preventDefault();e.target.reset();
+  const ok=document.getElementById('ok');ok.style.display='block';
+  setTimeout(()=>ok.style.display='none',5000);
+});
+
+/* star particles */
+(function(){
+  const c=document.getElementById('stars'),x=c.getContext('2d');let W,H;const P=[];
+  function size(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight}
+  size();addEventListener('resize',size);
+  for(let i=0;i<70;i++)P.push({x:Math.random(),y:Math.random(),r:Math.random()*1.8+.4,s:Math.random()*.0006+.0002,o:Math.random()*.5+.15});
+  (function loop(){
+    x.clearRect(0,0,W,H);
+    P.forEach(p=>{p.y-=p.s;if(p.y<0)p.y=1;
+      x.globalAlpha=p.o;x.fillStyle='#FFB627';
+      x.beginPath();x.arc(p.x*W,p.y*H,p.r,0,7);x.fill()});
+    x.globalAlpha=1;requestAnimationFrame(loop);
+  })();
+})();
+</script>
+</body>
+</html>
