@@ -327,8 +327,9 @@ DIRETRIZ DE RESPOSTA (MUITO IMPORTANTE):
                 } catch {}
             }
             if (!apiKey || apiKey === "SUA_CHAVE_AQUI" || apiKey.length < 20) throw new Error("CHAVE_API_AUSENTE");
-            const model = "gemini-1.5-flash";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+            // Modelos em ordem de tentativa - v1beta pode nao ter gemini-1.5-flash em alguns projetos
+            const models = ["gemini-2.0-flash", "gemini-2.0-flash-001", "gemini-1.5-flash", "gemini-1.5-flash-001", "gemini-1.5-flash-latest"];
+            let modelIdx = 0;
             const useSearch = new URLSearchParams(window.location.search).has('search');
             const payload = {
                 contents: history,
@@ -337,6 +338,8 @@ DIRETRIZ DE RESPOSTA (MUITO IMPORTANTE):
             };
             for (let i = 0; i < retries; i++) {
                 try {
+                    const model = models[modelIdx];
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
                     const response = await fetch(apiUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -344,7 +347,13 @@ DIRETRIZ DE RESPOSTA (MUITO IMPORTANTE):
                     });
                     if (!response.ok) {
                         const errBody = await response.text();
-                        console.error("Erro API:", response.status, errBody);
+                        console.error("Erro API:", model, response.status, errBody);
+                        // Se modelo nao existe (404), tenta proximo modelo da lista
+                        if (response.status === 404 && errBody.includes("is not found") && modelIdx < models.length - 1) {
+                            console.warn(`Modelo ${model} nao encontrado, tentando ${models[modelIdx+1]}`);
+                            modelIdx++;
+                            continue;
+                        }
                         if (response.status === 400 || response.status === 403) throw new Error(`CHAVE_INVALIDA (${response.status})`);
                         if (response.status === 429) {
                             let wait = 20;
