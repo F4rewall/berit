@@ -190,8 +190,7 @@ textarea{min-height:100px;resize:vertical}
 
 footer{position:relative;z-index:10;border-top:1px solid rgba(255,255,255,.06);padding:14px 24px;text-align:center;color:#6b675f;font-size:12.5px;background:rgba(11,11,13,.9)}
 footer .b{font-family:'Montserrat';font-weight:900;letter-spacing:3px;background:linear-gradient(120deg,var(--amber),var(--crimson));-webkit-background-clip:text;background-clip:text;color:transparent}
-.wa{position:fixed;right:22px;bottom:64px;z-index:60;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;font-size:26px;text-decoration:none;box-shadow:0 10px 30px rgba(37,211,102,.4);transition:transform .25s}
-.wa:hover{transform:scale(1.08)}
+
 
 /* ---------- empty state animado (igual BERIT da home) ---------- */
 .empty-state{position:relative;text-align:center;padding:48px 20px 40px;margin-top:18px;background:radial-gradient(600px 300px at 50% 0%,rgba(255,165,0,.08),transparent 70%),var(--card);border:1px solid rgba(255,165,0,.14);border-radius:24px;overflow:hidden;animation:emptyCardIn .6s ease both}
@@ -213,14 +212,42 @@ footer .b{font-family:'Montserrat';font-weight:900;letter-spacing:3px;background
 
 @media(max-width:900px){.about-grid,.contact-grid{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.sched{grid-template-columns:1fr}}
 @media(max-width:640px){
-  .tabs{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(11,11,13,.98);flex-direction:column;padding:14px;border-bottom:1px solid var(--line);border-radius:0}
+  .nav-inner{padding:12px 16px}
+  .tabs{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(11,11,13,.98);flex-direction:column;padding:14px;border-bottom:1px solid var(--line);border-radius:0;gap:8px}
   .tabs.open{display:flex}
-  .tab{text-align:center;padding:13px}
+  .tab{text-align:center;padding:14px;font-size:13px}
   .burger{display:block}
-  .grid,.row2{grid-template-columns:1fr}
+  /* respiro geral - evita visual achatado */
+  .panel{padding:28px 18px 90px}
+  .wrap{padding:0 2px}
+  .hero{padding-top:4vh;gap:22px}
+  .berit{font-size:clamp(72px,22vw,98px);letter-spacing:1px;line-height:.95}
+  .hero .tag{font-size:16px;line-height:1.6;margin:6px auto 10px;max-width:340px;padding:0 8px}
+  .cta{flex-direction:column;align-items:stretch;gap:12px;width:100%;max-width:340px}
+  .cta .btn{width:100%;padding:16px 24px;font-size:14px}
+  .verse-mini{margin:18px auto 0;padding:18px 20px}
+  .verse-mini p{font-size:15px;line-height:1.5}
+  .kicker{font-size:10px;padding:6px 14px;margin-bottom:12px}
+  .sec-title{font-size:28px;line-height:1.15;margin-bottom:8px}
+  .sec-sub{font-size:15px;line-height:1.6}
+  .about-grid{gap:28px;margin-top:22px}
+  .about-text h3{font-size:20px}
+  .about-text p{font-size:15px;line-height:1.7}
+  .stats{gap:10px;margin-top:18px}
+  .stat{padding:16px 6px}
+  .stat b{font-size:26px}
+  .sched{gap:12px;margin-top:20px}
+  .sched-item{padding:16px}
+  .grid{grid-template-columns:1fr;gap:16px}
+  .row2{grid-template-columns:1fr;gap:12px}
+  .card{padding:26px 20px}
+  .empty-state{padding:32px 16px 28px;margin-top:14px}
+  .empty-icon{font-size:38px}
+  .empty-title{font-size:18px}
+  .empty-berit{font-size:clamp(36px,12vw,54px)}
   .logo-hero{width:140px;height:140px}
-  .berit{letter-spacing:3px}
-  .chat-frame iframe{height:70vh;min-height:420px}
+  .chat-frame{margin-top:16px}
+  .chat-frame iframe{height:72vh;min-height:420px}
   body{overflow:hidden}
 }
 </style>
@@ -452,7 +479,7 @@ footer .b{font-family:'Montserrat';font-weight:900;letter-spacing:3px;background
 
   </div>
 </div>
-<a class="wa" href="https://wa.me/" title="Conversar no WhatsApp">💬</a>
+
 
 <script>
 /* ---------- tabs (sem scroll) ---------- */
