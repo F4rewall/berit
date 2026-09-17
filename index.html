@@ -7,7 +7,7 @@
 <meta name="description" content="BERIT — grupo de jovens. Fé, amizade e propósito.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@400;500;600&family=Caveat:wght@500;700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
 <style>
 :root{
   --amber:#FFA500; --gold:#FFD166; --crimson:#C41E3A;
@@ -16,7 +16,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow:hidden}
+body{font-family:'Inter',system-ui,sans-serif;background:radial-gradient(700px 380px at 50% 0%,rgba(255,165,0,.10),transparent 65%),radial-gradient(600px 400px at 90% 100%,rgba(196,30,58,.08),transparent 60%),var(--bg);color:var(--text);line-height:1.7;overflow:hidden}
 h1,h2,h3{font-family:'Montserrat',sans-serif;line-height:1.2}
 img{max-width:100%}
 ::selection{background:rgba(255,165,0,.35)}
@@ -25,9 +25,8 @@ img{max-width:100%}
 ::-webkit-scrollbar-thumb{background:#7a5200;border-radius:4px}
 
 /* ---------- layout ---------- */
-.app{height:100vh;display:flex;flex-direction:column;position:relative;
-  background:radial-gradient(700px 380px at 50% 0%,rgba(255,165,0,.10),transparent 65%),radial-gradient(600px 400px at 90% 100%,rgba(196,30,58,.08),transparent 60%),var(--bg)}
-#stars{position:absolute;inset:0;pointer-events:none;z-index:0}
+.app{height:100vh;display:flex;flex-direction:column;position:relative;background:transparent}
+#stars{position:fixed;inset:0;pointer-events:none;z-index:1;width:100vw;height:100vh}
 
 /* ---------- navbar / tabs ---------- */
 .nav{position:relative;z-index:10;border-bottom:1px solid var(--line);background:rgba(11,11,13,.9);backdrop-filter:blur(14px)}
@@ -49,15 +48,19 @@ img{max-width:100%}
 .panel.exit-left{transform:translateX(-40px) scale(.985)}
 .wrap{max-width:1060px;margin:0 auto}
 
-/* ---------- hero (aba início) ---------- */
-.hero{text-align:center;padding-top:2vh}
+/* ---------- hero (aba início) - BERIT fonte da logo ---------- */
+.hero{text-align:center;padding-top:6vh;display:flex;flex-direction:column;align-items:center;gap:18px}
 .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);color:var(--gold);border-radius:999px;padding:8px 20px;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;background:rgba(255,165,0,.06)}
-.logo-hero{width:180px;height:180px;object-fit:contain;margin:26px auto 6px;display:block;filter:drop-shadow(0 0 34px rgba(255,165,0,.35));animation:floaty 5s ease-in-out infinite}
+.logo-hero{display:none}
 
-/* BERIT animado */
-.berit{font-size:clamp(64px,11vw,124px);font-weight:900;letter-spacing:6px;display:flex;justify-content:center;gap:.02em;perspective:600px}
-.berit span{display:inline-block;background:linear-gradient(115deg,#FFB627,#FFD166 30%,#FF6B35 55%,#C41E3A 80%,#FFB627);background-size:250% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:flipIn .8s cubic-bezier(.2,.9,.3,1.2) both,shine 4s linear infinite,glowPulse 3s ease-in-out infinite}
+/* BERIT - cor sólida igual da logo */
+.berit{font-family:'Caveat','Shadows Into Light',cursive;font-size:clamp(88px,15vw,168px);font-weight:700;letter-spacing:2px;line-height:1;display:flex;justify-content:center;gap:.02em;transform:rotate(-2deg)}
+.berit span{display:inline-block;color:#FFA500;animation:flipIn .7s cubic-bezier(.2,.9,.3,1.2) both}
+.berit span:nth-child(1){animation-delay:0s}
+.berit span:nth-child(2){animation-delay:.06s}
+.berit span:nth-child(3){animation-delay:.12s}
+.berit span:nth-child(4){animation-delay:.18s}
+.berit span:nth-child(5){animation-delay:.24s}
 .berit span:nth-child(1){animation-delay:0s,0s,0s}
 .berit span:nth-child(2){animation-delay:.08s,0s,.15s}
 .berit span:nth-child(3){animation-delay:.16s,0s,.3s}
@@ -120,6 +123,55 @@ img{max-width:100%}
 .chat-frame{margin-top:28px;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5);background:#0f0f13}
 .chat-frame iframe{width:100%;height:62vh;min-height:480px;border:none;display:block}
 
+/* lumen - feed tipo TikTok (vídeos em tela cheia) */
+#p-lumen{padding:0 !important;overflow:hidden !important}
+#p-lumen .wrap{max-width:none;margin:0;height:100%;display:flex;flex-direction:column;padding:0}
+.lumen-header{padding:8px 16px;flex-shrink:0;background:rgba(11,11,13,.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px}
+.lumen-header .kicker{margin:0;font-size:9px;padding:4px 10px}
+.lumen-header .sec-title{font-size:18px;margin:0}
+.lumen-header .sec-sub{display:none}
+@media(min-width:700px){.lumen-header .sec-sub{display:block;font-size:12px}}
+.lumen-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;max-width:520px;margin:0 auto;width:100%;min-height:0}
+.lumen-feed{flex:1;overflow-y:scroll;overflow-x:hidden;scroll-snap-type:y mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none;display:flex;flex-direction:column;gap:0;background:#000;min-height:0}
+.lumen-feed::-webkit-scrollbar{display:none}
+.lumen-post{height:100%;min-height:100%;scroll-snap-align:start;scroll-snap-stop:always;background:#000;border:none;overflow:hidden;display:flex;flex-direction:column;animation:none;flex-shrink:0;position:relative}
+.lumen-head{display:flex;align-items:center;gap:10px;padding:10px 14px;flex-shrink:0;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);position:absolute;top:0;left:0;right:0;z-index:2;border-bottom:1px solid rgba(255,255,255,.08)}
+.lumen-head img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,165,0,.4)}
+.lumen-head b{font-family:'Montserrat';font-size:13px;font-weight:800}
+.lumen-head span{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
+.lumen-head small{margin-left:auto;color:var(--muted);font-size:12px}
+.lumen-media{flex:1;position:relative;background:#000;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:0;height:100%}
+.lumen-media img,.lumen-media video{width:100%;height:100%;object-fit:cover;display:block;object-position:center}
+.lumen-media video{object-fit:cover}
+.lumen-media .tap-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:.2s}
+.lumen-media .tap-hint span{background:rgba(0,0,0,.5);color:#fff;border-radius:999px;padding:8px 14px;font-size:22px}
+.lumen-overlay{position:absolute;right:10px;bottom:110px;display:flex;flex-direction:column;gap:16px;align-items:center;z-index:2}
+.lumen-overlay button{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;transition:.2s}
+.lumen-overlay button:active{transform:scale(.92)}
+.lumen-overlay span{font-size:11px;font-weight:700;margin-top:2px}
+.lumen-foot{flex-shrink:0;background:linear-gradient(transparent,rgba(0,0,0,.75) 30%, rgba(0,0,0,.85));padding:10px 16px 12px;position:absolute;bottom:0;left:0;right:0;z-index:1}
+.lumen-actions{display:flex;align-items:center;gap:14px;padding:0 0 6px}
+.lumen-actions button{background:none;border:none;color:#fff;cursor:pointer;font-size:19px;display:flex;align-items:center;gap:6px;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.lumen-actions .liked{color:#ff3040}
+.lumen-actions span{font-size:12px;color:#fff;font-weight:700}
+.lumen-caption{font-size:13.5px;color:#fff;line-height:1.45;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+.lumen-caption b{color:var(--gold)}
+.lumen-comments{border-top:1px solid rgba(255,255,255,.08);padding:8px 12px;max-height:110px;overflow-y:auto;background:rgba(0,0,0,.35);backdrop-filter:blur(6px)}
+.lumen-comments h4{display:none}
+.comment{font-size:12.5px;margin-bottom:4px;color:#ddd}
+.comment b{color:#fff}
+.lumen-add-comment{display:flex;gap:8px;margin-top:6px}
+.lumen-add-comment input{flex:1;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15);border-radius:999px;color:#fff;padding:8px 14px;font-size:12.5px;outline:none}
+.lumen-add-comment input::placeholder{color:rgba(255,255,255,.5)}
+.lumen-add-comment button{background:#fff;color:#000;border:none;border-radius:999px;padding:8px 16px;font-family:'Montserrat';font-weight:700;font-size:11px;cursor:pointer}
+.lumen-new{background:var(--card);border:1px dashed rgba(255,165,0,.3);border-radius:16px;padding:16px;margin:12px 12px 10px;flex-shrink:0}
+.lumen-new h4{font-size:13px;margin-bottom:8px}
+.lumen-new .row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.lumen-new input[type="text"]{flex:1;min-width:140px}
+.lumen-empty{text-align:center;padding:40px 20px;color:var(--muted)}
+.lumen-progress{position:absolute;top:0;left:0;right:0;height:2px;background:rgba(255,255,255,.15);z-index:3}
+.lumen-progress i{display:block;height:100%;background:var(--amber);width:0%}
+
 /* contato */
 .contact-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;margin-top:30px;align-items:start}
 form{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:14px}
@@ -140,6 +192,24 @@ footer{position:relative;z-index:10;border-top:1px solid rgba(255,255,255,.06);p
 footer .b{font-family:'Montserrat';font-weight:900;letter-spacing:3px;background:linear-gradient(120deg,var(--amber),var(--crimson));-webkit-background-clip:text;background-clip:text;color:transparent}
 .wa{position:fixed;right:22px;bottom:64px;z-index:60;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;font-size:26px;text-decoration:none;box-shadow:0 10px 30px rgba(37,211,102,.4);transition:transform .25s}
 .wa:hover{transform:scale(1.08)}
+
+/* ---------- empty state animado (igual BERIT da home) ---------- */
+.empty-state{position:relative;text-align:center;padding:48px 20px 40px;margin-top:18px;background:radial-gradient(600px 300px at 50% 0%,rgba(255,165,0,.08),transparent 70%),var(--card);border:1px solid rgba(255,165,0,.14);border-radius:24px;overflow:hidden;animation:emptyCardIn .6s ease both}
+@keyframes emptyCardIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
+.empty-state::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:70%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,165,0,.5),transparent)}
+.empty-icon{font-size:44px;display:inline-block;animation:emptyFloat 2.8s ease-in-out infinite;filter:drop-shadow(0 0 14px rgba(255,165,0,.4))}
+@keyframes emptyFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}
+.empty-title{font-family:'Montserrat',sans-serif;font-size:clamp(17px,3.2vw,22px);font-weight:800;color:#fff;margin:14px 0 4px;animation:emptyFadeUp .6s .15s both}
+.empty-sub{font-family:'Montserrat',sans-serif;font-size:13px;color:var(--muted);letter-spacing:1px;animation:emptyFadeUp .6s .25s both}
+@keyframes emptyFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.empty-berit{font-family:'Caveat','Shadows Into Light',cursive;font-size:clamp(42px,8vw,72px);font-weight:700;letter-spacing:2px;line-height:1;display:flex;justify-content:center;gap:.02em;transform:rotate(-2deg);margin-top:16px}
+.empty-berit span{display:inline-block;color:#FFA500;animation:flipIn .7s cubic-bezier(.2,.9,.3,1.2) both, glowPulse 2.2s ease-in-out infinite}
+.empty-dots{display:inline-flex;gap:4px;margin-left:2px}
+.empty-dots i{width:7px;height:7px;border-radius:50%;background:var(--amber);display:inline-block;animation:dotBounce 1s ease-in-out infinite}
+.empty-dots i:nth-child(2){animation-delay:.15s}.empty-dots i:nth-child(3){animation-delay:.3s}
+.empty-dots i:nth-child(4){animation-delay:.45s}.empty-dots i:nth-child(5){animation-delay:.6s}.empty-dots i:nth-child(6){animation-delay:.75s}
+@keyframes dotBounce{0%,100%{transform:translateY(0);opacity:.7}50%{transform:translateY(-8px);opacity:1;box-shadow:0 0 8px var(--amber)}}
+.empty-badge{display:inline-block;margin-top:18px;background:rgba(255,165,0,.08);border:1px solid rgba(255,165,0,.18);color:var(--gold);font-family:'Montserrat';font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:7px 16px;border-radius:999px;animation:emptyFadeUp .6s .45s both}
 
 @media(max-width:900px){.about-grid,.contact-grid{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.sched{grid-template-columns:1fr}}
 @media(max-width:640px){
@@ -166,7 +236,9 @@ footer .b{font-family:'Montserrat';font-weight:900;letter-spacing:3px;background
     <div class="tabs" id="tabs">
       <button class="tab active" data-tab="inicio">Início</button>
       <button class="tab" data-tab="sobre">Quem Somos</button>
-      <button class="tab" data-tab="atividades">Atividades</button>
+      <button class="tab" data-tab="eventos">Encontros</button>
+      <button class="tab" data-tab="retiros">Retiros</button>
+      <button class="tab" data-tab="lumen">Lumen</button>
       <button class="tab" data-tab="assistente">Assistente</button>
       <button class="tab" data-tab="contato">Contato</button>
     </div>
@@ -179,13 +251,11 @@ footer .b{font-family:'Montserrat';font-weight:900;letter-spacing:3px;background
   <!-- INÍCIO -->
   <div class="panel active" id="p-inicio">
     <div class="wrap hero">
-      <span class="badge">✦ Grupo de Jovens</span>
-      <img src="logo.png" alt="Logo BERIT — coroa de espinhos" class="logo-hero">
       <h1 class="berit" aria-label="BERIT"><span>B</span><span>E</span><span>R</span><span>I</span><span>T</span></h1>
       <p class="tag">Fé, amizade e propósito. Um lugar para crescer, servir e pertencer.</p>
       <div class="cta">
         <button class="btn btn-gold" data-tab="contato">QUERO PARTICIPAR</button>
-        <button class="btn btn-ghost" data-tab="assistente">FALAR COM O BERITBOT</button>
+        <button class="btn btn-ghost" data-tab="assistente">FALAR COM O ELO</button>
       </div>
       <div class="verse-mini">
         <p>“Não se amoldem ao padrão deste mundo, mas <span>transformem-se</span> pela renovação da mente.”</p>
@@ -224,62 +294,142 @@ footer .b{font-family:'Montserrat';font-weight:900;letter-spacing:3px;background
     </div>
   </div>
 
-  <!-- ATIVIDADES -->
-  <div class="panel" id="p-atividades">
+  <!-- EVENTOS -->
+  <div class="panel" id="p-eventos">
     <div class="wrap">
-      <span class="kicker">O que fazemos</span>
-      <h2 class="sec-title">Nossas <em>atividades</em></h2>
-      <p class="sec-sub">Tem espaço para todo mundo. Escolha onde se envolver:</p>
-      <div class="grid">
-        <div class="card"><div class="ico">📖</div><h3>Estudos Bíblicos</h3><p>Estudo e reflexão da Palavra de forma leve e participativa.</p></div>
-        <div class="card"><div class="ico">🎵</div><h3>Louvor e Adoração</h3><p>Música e adoração para renovar o coração.</p></div>
-        <div class="card"><div class="ico">🤲</div><h3>Ação Social</h3><p>Projetos solidários para quem mais precisa.</p></div>
-        <div class="card"><div class="ico">🎮</div><h3>Gincanas e Eventos</h3><p>Jogos, noites temáticas e muita diversão.</p></div>
-        <div class="card"><div class="ico">⛰️</div><h3>Retiros</h3><p>Comunhão e reflexão em meio à natureza.</p></div>
-        <div class="card"><div class="ico">🎨</div><h3>Artes e Talentos</h3><p>Música, dança, teatro e mídia — use seus dons.</p></div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <span class="kicker">Próximos encontros</span>
+          <h2 class="sec-title">Nossos <em>encontros</em></h2>
+          <p class="sec-sub">O ADM posta aqui os próximos encontros e missões. Fique ligado!</p>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+          <span id="eventos-adm-badge" style="display:none;background:linear-gradient(120deg,var(--amber),var(--crimson));color:#fff;font-family:'Montserrat';font-size:10px;font-weight:800;letter-spacing:1.5px;padding:6px 12px;border-radius:999px">ADM ✓</span>
+        </div>
       </div>
+
+      <!-- Form ADM Eventos -->
+      <div id="eventos-new" style="display:none;background:var(--card);border:1px dashed rgba(255,165,0,.3);border-radius:16px;padding:18px;margin-top:18px">
+        <h4 style="font-size:14px;margin-bottom:10px">➕ Novo encontro (só ADM) — Alt+Q+L</h4>
+        <div class="row2">
+          <div><label>Título</label><input id="ev-titulo" type="text" placeholder="Ex: Retiro Lumen 2026"></div>
+          <div><label>Data e hora</label><input id="ev-data" type="datetime-local"></div>
+        </div>
+        <div class="row2" style="margin-top:10px">
+          <div><label>Local</label><input id="ev-local" type="text" placeholder="Ex: Chácara São José"></div>
+          <div><label>Imagem (URL ou arquivo)</label><input id="ev-file" type="file" accept="image/*"><input id="ev-img" type="text" placeholder="https://..." style="margin-top:6px"></div>
+        </div>
+        <div style="margin-top:10px"><label>Descrição</label><textarea id="ev-desc" placeholder="Descrição do evento..."></textarea></div>
+        <button class="btn btn-gold" style="margin-top:12px" onclick="addEvento()">PUBLICAR ENCONTRO</button>
+      </div>
+
+      <div id="eventos-feed" style="margin-top:22px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px"></div>
+      <div id="eventos-empty" style="display:none">
+        <div class="empty-state">
+          <div class="empty-icon">📅✨</div>
+          <div class="empty-title">Infelizmente não temos nada por agora 😕</div>
+          <div class="empty-sub">Mas fica ligado — novidade chegando!</div>
+          <div class="empty-berit" aria-label="Em breve"><span style="animation-delay:0s">E</span><span style="animation-delay:.06s">m</span><span style="animation-delay:.12s">&nbsp;</span><span style="animation-delay:.18s">b</span><span style="animation-delay:.24s">r</span><span style="animation-delay:.30s">e</span><span style="animation-delay:.36s">v</span><span style="animation-delay:.42s">e</span><span class="empty-dots" style="margin-left:6px"><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+          <div class="empty-badge">🔔 Em breve teremos novos encontros</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RETIROS -->
+  <div class="panel" id="p-retiros">
+    <div class="wrap">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <span class="kicker">Experiência com Deus</span>
+          <h2 class="sec-title">Nossos <em>retiros</em></h2>
+          <p class="sec-sub">Momentos de encontro profundo com Cristo. O ADM posta aqui os próximos retiros.</p>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+          <span id="retiros-adm-badge" style="display:none;background:linear-gradient(120deg,var(--amber),var(--crimson));color:#fff;font-family:'Montserrat';font-size:10px;font-weight:800;letter-spacing:1.5px;padding:6px 12px;border-radius:999px">ADM ✓</span>
+        </div>
+      </div>
+      <div id="retiros-new" style="display:none;background:var(--card);border:1px dashed rgba(255,165,0,.3);border-radius:16px;padding:18px;margin-top:18px">
+        <h4 style="font-size:14px;margin-bottom:10px">➕ Novo retiro (só ADM) — Alt+Q+L</h4>
+        <div class="row2">
+          <div><label>Título</label><input id="rt-titulo" type="text" placeholder="Ex: Retiro de Carnaval - Lumen"></div>
+          <div><label>Data e hora</label><input id="rt-data" type="datetime-local"></div>
+        </div>
+        <div class="row2" style="margin-top:10px">
+          <div><label>Local</label><input id="rt-local" type="text" placeholder="Ex: Chácara Betânia"></div>
+          <div><label>Vagas / Valor</label><input id="rt-vagas" type="text" placeholder="Ex: 30 vagas • R$ 80"></div>
+        </div>
+        <div style="margin-top:10px"><label>Imagem (URL ou arquivo)</label><input id="rt-file" type="file" accept="image/*"><input id="rt-img" type="text" placeholder="https://..." style="margin-top:6px"></div>
+        <div style="margin-top:10px"><label>Descrição</label><textarea id="rt-desc" placeholder="O que vai acontecer no retiro..."></textarea></div>
+        <button class="btn btn-gold" style="margin-top:12px" onclick="addRetiro()">PUBLICAR RETIRO</button>
+      </div>
+      <div id="retiros-feed" style="margin-top:22px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px"></div>
+      <div id="retiros-empty" style="display:none">
+        <div class="empty-state">
+          <div class="empty-icon">⛰️✨</div>
+          <div class="empty-title">Infelizmente não temos nada por agora 😕</div>
+          <div class="empty-sub">Um retiro incrível está sendo preparado!</div>
+          <div class="empty-berit" aria-label="Em breve"><span style="animation-delay:0s">E</span><span style="animation-delay:.06s">m</span><span style="animation-delay:.12s">&nbsp;</span><span style="animation-delay:.18s">b</span><span style="animation-delay:.24s">r</span><span style="animation-delay:.30s">e</span><span style="animation-delay:.36s">v</span><span style="animation-delay:.42s">e</span><span class="empty-dots" style="margin-left:6px"><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+          <div class="empty-badge">🙏 Em breve teremos novos retiros</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LUMEN -->
+  <div class="panel" id="p-lumen">
+    <div class="wrap">
+      <!-- Header removido a pedido - acesso ADM agora via Alt+Q+L -->
+      <div id="lumen-adm-status" style="display:none;position:absolute;top:10px;right:16px;z-index:5;display:none;align-items:center;gap:8px">
+        <span id="lumen-adm-badge" style="display:none;background:linear-gradient(120deg,var(--amber),var(--crimson));color:#fff;font-family:'Montserrat';font-size:10px;font-weight:800;letter-spacing:1.5px;padding:6px 12px;border-radius:999px">ADM ✓</span>
+        <button id="lumen-adm-logout" style="display:none;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:999px;padding:8px 14px;font-family:'Montserrat';font-weight:700;font-size:11px;cursor:pointer" onclick="admLogout()">Sair ADM ✕</button>
+      </div>
+
+      <div class="lumen-wrap">
+        <!-- Painel exclusivo ADM (só aparece após Alt+Q+L) -->
+        <div class="lumen-new" id="lumen-new" style="display:none">
+          <h4>📸 Novo post — exclusivo ADM</h4>
+          <div class="row">
+            <input id="lumen-caption" type="text" placeholder="Legenda... ex: Noite de louvor 🔥">
+            <input id="lumen-media-url" type="text" placeholder="URL da imagem/vídeo (ou use o arquivo abaixo)">
+          </div>
+          <div class="row">
+            <input id="lumen-file" type="file" accept="image/*,video/*">
+            <select id="lumen-type" style="background:#0e0e11;border:1px solid rgba(255,255,255,.1);border-radius:12px;color:var(--text);padding:10px">
+              <option value="image">Imagem</option>
+              <option value="video">Vídeo</option>
+            </select>
+            <button class="btn btn-gold" style="padding:10px 18px;font-size:12px" onclick="addLumenPost()">POSTAR</button>
+            <button class="btn btn-ghost" style="padding:10px 16px;font-size:11px" onclick="admLogout()">Sair</button>
+          </div>
+          <p style="font-size:11px;color:var(--muted)">Atalho ADM: Alt+Q+L</p>
+        </div>
+        <div class="lumen-feed" id="lumen-feed"></div>
+      </div>
+
     </div>
   </div>
 
   <!-- ASSISTENTE -->
   <div class="panel" id="p-assistente">
     <div class="wrap">
-      <span class="kicker">Assistente virtual</span>
-      <h2 class="sec-title">Converse com o <em>BeritBot</em></h2>
-      <p class="sec-sub">Tire dúvidas sobre a fé, o grupo e a vida cristã — direto aqui no site.</p>
-      <div class="chat-frame">
-        <iframe src="chatbot_cat_lico_berit.html" title="BeritBot — assistente do grupo BERIT"></iframe>
+      <div class="chat-frame" style="margin-top:0">
+        <iframe src="chatbot_cat_lico_berit.html" title="Elo — assistente do grupo BERIT"></iframe>
       </div>
     </div>
   </div>
 
   <!-- CONTATO -->
   <div class="panel" id="p-contato">
-    <div class="wrap">
+    <div class="wrap" style="text-align:center;max-width:520px">
       <span class="kicker">Fale conosco</span>
       <h2 class="sec-title">Faça parte do <em>BERIT</em></h2>
-      <p class="sec-sub">Preencha e entraremos em contato com você.</p>
-      <div class="contact-grid">
-        <form id="form">
-          <div class="row2">
-            <div><label>Nome</label><input type="text" placeholder="Seu nome" required></div>
-            <div><label>WhatsApp</label><input type="tel" placeholder="(00) 00000-0000"></div>
-          </div>
-          <div class="row2">
-            <div><label>E-mail</label><input type="email" placeholder="voce@email.com"></div>
-            <div><label>Idade</label><input type="number" min="12" max="99" placeholder="Sua idade"></div>
-          </div>
-          <div><label>Mensagem</label><textarea placeholder="Conte um pouco sobre você..."></textarea></div>
-          <button class="btn btn-gold" type="submit">ENVIAR MENSAGEM</button>
-          <div class="ok" id="ok">✅ Mensagem enviada! Em breve entraremos em contato.</div>
-        </form>
-        <div class="info">
-          <div class="info-item"><div class="dot">📍</div><div><h4>Onde</h4><p>Encontros semanais — fale conosco para o endereço</p></div></div>
-          <div class="info-item"><div class="dot">⏰</div><div><h4>Quando</h4><p>Sábados às 19h · Quartas às 19h30</p></div></div>
-          <div class="info-item"><div class="dot">📱</div><div><h4>Instagram</h4><p>@berit.grupo</p></div></div>
-          <div class="info-item"><div class="dot">✉️</div><div><h4>E-mail</h4><p>contato@berit.grupo</p></div></div>
-        </div>
-      </div>
+      <p class="sec-sub" style="margin:0 auto 28px">Nos acompanhe no Instagram</p>
+      <a href="https://www.instagram.com/grupo_berit/" target="_blank" rel="noopener" style="display:inline-flex;flex-direction:column;align-items:center;gap:14px;text-decoration:none">
+        <span style="width:84px;height:84px;border-radius:22px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);box-shadow:0 12px 30px rgba(214,41,118,.35);font-size:42px">📸</span>
+        <span style="font-family:'Montserrat';font-weight:800;font-size:18px;background:linear-gradient(90deg,#feda75,#d62976,#962fbf);-webkit-background-clip:text;background-clip:text;color:transparent">@grupo_berit</span>
+        <span style="color:var(--muted);font-size:13px">Toque para abrir no Instagram →</span>
+      </a>
     </div>
   </div>
 
@@ -288,12 +438,26 @@ footer .b{font-family:'Montserrat';font-weight:900;letter-spacing:3px;background
 <footer>Feito com 💛 para o <span class="b">BERIT</span> — Grupo de Jovens · © 2026</footer>
 </div>
 
+<!-- Modal ADM global (fora dos panels para não ser clipado) -->
+<div id="adm-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:999;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#16161B;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:26px;max-width:380px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.7)">
+    <h3 style="font-family:'Montserrat';font-size:16px;margin-bottom:6px">🔒 Acesso ADM</h3>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:14px">Só o administrador do BERIT pode postar. Digite a senha.</p>
+    <input id="adm-pass" type="password" placeholder="Senha do ADM" style="width:100%;background:#0e0e11;border:1px solid rgba(255,255,255,.1);border-radius:12px;color:var(--text);padding:12px 14px;font-size:14px;outline:none;margin-bottom:10px">
+    <p id="adm-err" style="display:none;color:#ff6b6b;font-size:12px;margin-bottom:8px">Senha incorreta.</p>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-gold" style="flex:1" onclick="admLogin()">Entrar</button>
+      <button class="btn btn-ghost" onclick="closeAdmModal()">Cancelar</button>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px">Atalho: Alt+Q+L • Senha: <code style="background:#0e0e11;padding:2px 6px;border-radius:6px">berit2026</code></p>
+  </div>
+</div>
 <a class="wa" href="https://wa.me/" title="Conversar no WhatsApp">💬</a>
 
 <script>
 /* ---------- tabs (sem scroll) ---------- */
 const tabs=[...document.querySelectorAll('[data-tab]')];
-const panels={inicio:document.getElementById('p-inicio'),sobre:document.getElementById('p-sobre'),atividades:document.getElementById('p-atividades'),assistente:document.getElementById('p-assistente'),contato:document.getElementById('p-contato')};
+const panels={inicio:document.getElementById('p-inicio'),sobre:document.getElementById('p-sobre'),eventos:document.getElementById('p-eventos'),retiros:document.getElementById('p-retiros'),lumen:document.getElementById('p-lumen'),assistente:document.getElementById('p-assistente'),contato:document.getElementById('p-contato')};
 let current='inicio',counted=false;
 function go(name){
   if(!panels[name]||name===current)return;
@@ -306,16 +470,29 @@ function go(name){
   document.getElementById('tabs').classList.remove('open');
   if(name==='sobre'&&!counted){counted=true;runCounters()}
   if(name==='inicio'){replayBerit()}
+  if(name==='eventos'||name==='retiros'){replayEmpty(name)}
 }
 tabs.forEach(b=>b.addEventListener('click',()=>go(b.dataset.tab)));
 document.getElementById('burger').onclick=()=>document.getElementById('tabs').classList.toggle('open');
 
 /* replay BERIT animation */
 function replayBerit(){
-  const h=document.querySelector('.berit');
+  const h=document.querySelector('#p-inicio .berit');
+  if(!h) return;
   h.style.animation='none';h.querySelectorAll('span').forEach(s=>{s.style.animation='none'});
   void h.offsetWidth;
   h.querySelectorAll('span').forEach(s=>{s.style.animation=''});
+}
+function replayEmpty(tab){
+  const id=tab==='eventos'?'eventos-empty':'retiros-empty';
+  const box=document.getElementById(id);
+  if(!box||box.style.display==='none') return;
+  const state=box.querySelector('.empty-state');
+  const spans=box.querySelectorAll('.empty-berit span');
+  if(state){ state.style.animation='none'; void state.offsetWidth; state.style.animation=''; }
+  spans.forEach(s=>{ s.style.animation='none'; void s.offsetWidth; s.style.animation=''; });
+  const icon=box.querySelector('.empty-icon');
+  if(icon){ icon.style.animation='none'; void icon.offsetWidth; icon.style.animation=''; }
 }
 
 /* counters */
@@ -327,24 +504,348 @@ function runCounters(){
   });
 }
 
-/* form */
-document.getElementById('form').addEventListener('submit',e=>{
-  e.preventDefault();e.target.reset();
-  const ok=document.getElementById('ok');ok.style.display='block';
-  setTimeout(()=>ok.style.display='none',5000);
-});
+/* form (removido na nova versão de contato - guard evita quebrar todo o JS) */
+const _form=document.getElementById('form');
+if(_form){
+  _form.addEventListener('submit',e=>{
+    e.preventDefault();e.target.reset();
+    const ok=document.getElementById('ok');if(ok){ok.style.display='block';setTimeout(()=>ok.style.display='none',5000);}
+  });
+}
 
-/* star particles */
+/* ---------- LUMEN: feed tipo reels ---------- */
+const defaultPosts=[
+  {id:'1',type:'image',src:'logo.png',caption:'Noite de louvor no sábado 🔥 Que presença! #berit #lumen',likes:24,author:'Grupo BERIT',date:'hoje'},
+  {id:'2',type:'video',src:'Criar_video_animado_para_logo_20260911173251.mp4',caption:'Retiro 2026 — Deus fez maravilhas ⛰️✨',likes:41,author:'Grupo BERIT',date:'ontem'},
+  {id:'3',type:'image',src:'logo.png',caption:'Estudo bíblico de quarta — Romanos 12:2 🙏',likes:18,author:'Grupo BERIT',date:'2 dias'},
+];
+function getLumenPosts(){
+  try{ const s=JSON.parse(localStorage.getItem('lumen_posts')||'null'); return Array.isArray(s)&&s.length?s:defaultPosts }catch{return defaultPosts}
+}
+function saveLumenPosts(arr){ localStorage.setItem('lumen_posts', JSON.stringify(arr)); }
+function getLumenData(){
+  try{ return JSON.parse(localStorage.getItem('lumen_data')||'{}')}catch{return {}}
+}
+function saveLumenData(d){ localStorage.setItem('lumen_data', JSON.stringify(d)); }
+function renderLumen(){
+  const feed=document.getElementById('lumen-feed');
+  if(!feed) return;
+  const posts=getLumenPosts();
+  const data=getLumenData();
+  feed.innerHTML='';
+  if(!posts.length){ feed.innerHTML='<div class="lumen-empty">Nenhum post ainda. Seja o primeiro a postar! ✨</div>'; return; }
+  posts.forEach(p=>{
+    const d=data[p.id]||{liked:false,likes:p.likes,comments:p.comments||[]};
+    // comentarios padrao se vazio
+    if(!d.comments.length && p.id==='1') d.comments=[{user:'Ana',text:'Que noite linda! 🙏'},{user:'Pedro',text:'Presença real 🔥'}];
+    const div=document.createElement('div');
+    div.className='lumen-post';
+    const media = p.type==='video'
+      ? `<video src="${p.src}" muted playsinline loop preload="metadata" poster="logo.png" onclick="this.paused?this.play():this.pause()"></video>`
+      : `<img src="${p.src}" alt="${p.caption}" loading="lazy">`;
+    const commentsHtml = d.comments.slice(-3).map(c=>`<div class="comment"><b>${c.user}</b>${c.text}</div>`).join('') || '';
+    const adm=isAdm();
+    div.innerHTML=`
+      <div class="lumen-head"><img src="logo.png" alt="BERIT"><div><b>${p.author}</b><br><span>LUMEN • BERIT</span></div><small>${p.date}</small>${adm?`<button onclick="deletePost('${p.id}')" style="margin-left:10px;background:rgba(196,30,58,.12);border:1px solid rgba(196,30,58,.3);color:#ff8a8a;border-radius:999px;padding:4px 10px;font-size:11px;cursor:pointer">🗑️</button>`:''}</div>
+      <div class="lumen-media" onclick="if(event.target.tagName==='VIDEO'){}">${media}
+        <div class="tap-hint"><span>▶</span></div>
+        <div class="lumen-overlay">
+          <button onclick="toggleLike('${p.id}')" class="${d.liked?'liked':''}">${d.liked?'❤️':'🤍'}<span>${d.likes}</span></button>
+          <button onclick="focusComment('${p.id}')">💬<span>${d.comments.length}</span></button>
+          <button onclick="shareLumen('${p.id}')">↗️</button>
+        </div>
+        <div class="lumen-foot">
+          <div class="lumen-caption"><b>@grupo_berit</b> ${p.caption}</div>
+          ${commentsHtml?`<div style="margin-top:6px">${commentsHtml}</div><button onclick="openComments('${p.id}')" style="background:none;border:none;color:rgba(255,255,255,.7);font-size:11px;margin-top:4px;cursor:pointer">Ver ${d.comments.length} comentários</button>`:''}
+          <div class="lumen-add-comment">
+            <input id="input-${p.id}" type="text" placeholder="Comente..." onkeydown="if(event.key==='Enter') addComment('${p.id}')">
+            <button onclick="addComment('${p.id}')">Enviar</button>
+          </div>
+        </div>
+      </div>`;
+    feed.appendChild(div);
+  });
+  setupLumenObservers();
+}
+function focusComment(id){ document.getElementById('input-'+id)?.focus(); }
+function openComments(id){
+  const data=getLumenData(); const d=data[id]; if(!d) return;
+  const all=d.comments.map(c=>`• ${c.user}: ${c.text}`).join('\n');
+  alert(`Comentários (${d.comments.length}):\n\n${all || 'Nenhum'}`);
+}
+let lumenObserver=null;
+function setupLumenObservers(){
+  const feed=document.getElementById('lumen-feed');
+  if(!feed) return;
+  if(lumenObserver) lumenObserver.disconnect();
+  const vids=feed.querySelectorAll('video');
+  lumenObserver=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      const v=e.target;
+      if(e.isIntersecting && e.intersectionRatio>0.6){ v.play().catch(()=>{}); }
+      else { v.pause(); }
+    });
+  },{root:feed,threshold:[0.6]});
+  vids.forEach(v=>lumenObserver.observe(v));
+  // auto-play primeiro vídeo visível
+  setTimeout(()=>{ const first=feed.querySelector('video'); if(first) first.play().catch(()=>{}); },300);
+  // teclado setas para navegar
+  feed.onkeydown=null;
+}
+function toggleLike(id){
+  const data=getLumenData();
+  const posts=getLumenPosts();
+  const p=posts.find(x=>x.id===id);
+  if(!data[id]) data[id]={liked:false,likes:p.likes,comments:[]};
+  data[id].liked=!data[id].liked;
+  data[id].likes += data[id].liked?1:-1;
+  saveLumenData(data);
+  renderLumen();
+}
+function addComment(id){
+  const input=document.getElementById('input-'+id);
+  const text=input.value.trim();
+  if(!text) return;
+  const data=getLumenData();
+  const posts=getLumenPosts();
+  const p=posts.find(x=>x.id===id);
+  if(!data[id]) data[id]={liked:false,likes:p.likes,comments:[]};
+  data[id].comments.push({user:'Você',text});
+  saveLumenData(data);
+  input.value='';
+  renderLumen();
+  document.getElementById('input-'+id)?.focus();
+}
+function shareLumen(id){
+  const url=location.href.split('#')[0]+'#lumen';
+  if(navigator.share) navigator.share({title:'Lumen BERIT',url}).catch(()=>{});
+  else { navigator.clipboard.writeText(url); alert('Link copiado! 🔗'); }
+}
+async function addLumenPost(){
+  if(!isAdm()){ alert('Apenas o ADM pode postar.'); return; }
+  const caption=document.getElementById('lumen-caption').value.trim()||'Novo post Lumen ✨';
+  const url=document.getElementById('lumen-media-url').value.trim();
+  const type=document.getElementById('lumen-type').value;
+  const file=document.getElementById('lumen-file').files[0];
+  let src=url;
+  if(file){
+    src=await new Promise(res=>{
+      const r=new FileReader(); r.onload=e=>res(e.target.result); r.readAsDataURL(file);
+    });
+  }
+  if(!src){ alert('Cole uma URL ou escolha um arquivo.'); return; }
+  const posts=getLumenPosts();
+  posts.unshift({id:Date.now().toString(),type,src,caption,likes:0,author:'Grupo BERIT',date:'agora'});
+  saveLumenPosts(posts);
+  document.getElementById('lumen-caption').value='';
+  document.getElementById('lumen-media-url').value='';
+  document.getElementById('lumen-file').value='';
+  renderLumen();
+  document.getElementById('p-lumen').scrollTop=0;
+}
+/* ---------- ADM Lumen ---------- */
+const ADM_PASS="berit2026";
+function isAdm(){ return localStorage.getItem('lumen_isAdm')==='1'; }
+function updateAdmUI(){
+  const adm=isAdm();
+  const ln=document.getElementById('lumen-new'), lb=document.getElementById('lumen-adm-badge'), lo=document.getElementById('lumen-adm-logout'), status=document.getElementById('lumen-adm-status');
+  if(ln) ln.style.display=adm?'block':'none';
+  if(lb) lb.style.display=adm?'inline-block':'none';
+  if(lo) lo.style.display=adm?'inline-block':'none';
+  if(status) status.style.display=adm?'flex':'none';
+  const btn=document.getElementById('lumen-adm-btn'); if(btn) btn.style.display=adm?'none':'inline-block';
+  // eventos
+  const en=document.getElementById('eventos-new'), eb=document.getElementById('eventos-adm-badge'), ebb=document.getElementById('eventos-adm-btn');
+  if(en) en.style.display=adm?'block':'none';
+  if(eb) eb.style.display=adm?'inline-block':'none';
+  if(ebb) ebb.style.display=adm?'none':'inline-block';
+  // retiros
+  const rn=document.getElementById('retiros-new'), rb=document.getElementById('retiros-adm-badge'), rbb=document.getElementById('retiros-adm-btn');
+  if(rn) rn.style.display=adm?'block':'none';
+  if(rb) rb.style.display=adm?'inline-block':'none';
+  if(rbb) rbb.style.display=adm?'none':'inline-block';
+  renderEventos(); renderRetiros();
+}
+function openAdmModal(){
+  if(isAdm()){ updateAdmUI(); return; }
+  document.getElementById('adm-modal').style.display='flex';
+  document.getElementById('adm-pass').value='';
+  document.getElementById('adm-err').style.display='none';
+  setTimeout(()=>document.getElementById('adm-pass').focus(),100);
+}
+function closeAdmModal(){ document.getElementById('adm-modal').style.display='none'; }
+function admLogin(){
+  const v=document.getElementById('adm-pass').value;
+  if(v===ADM_PASS){ localStorage.setItem('lumen_isAdm','1'); closeAdmModal(); updateAdmUI(); renderLumen(); renderEventos(); renderRetiros(); }
+  else { document.getElementById('adm-err').style.display='block'; }
+}
+function admLogout(){ localStorage.removeItem('lumen_isAdm'); updateAdmUI(); closeAdmModal(); renderEventos(); renderRetiros(); }
+function deletePost(id){
+  if(!isAdm()) return;
+  if(!confirm('Apagar este post?')) return;
+  let posts=getLumenPosts().filter(p=>p.id!==id);
+  saveLumenPosts(posts);
+  const data=getLumenData(); delete data[id]; saveLumenData(data);
+  renderLumen();
+}
+document.getElementById('adm-pass')?.addEventListener('keydown',e=>{ if(e.key==='Enter') admLogin(); });
+document.addEventListener('DOMContentLoaded', ()=>{ updateAdmUI(); renderLumen(); renderEventos(); renderRetiros(); });
+document.getElementById('adm-modal')?.addEventListener('click',e=>{ if(e.target.id==='adm-modal') closeAdmModal(); });
+// Atalho ADM: Alt+Q+L, Alt+L, Ctrl+Alt+A ou 3 cliques na logo
+(function(){
+  let qDown=false;
+  function tryOpen(e){
+    e.preventDefault();
+    if(isAdm()){ if(confirm('Já está como ADM. Deseja sair?')) admLogout(); }
+    else openAdmModal();
+  }
+  document.addEventListener('keydown',e=>{
+    if(e.altKey && e.code==='KeyQ') qDown=true;
+    if(e.altKey && e.key && e.key.toLowerCase()==='l'){ tryOpen(e); qDown=false; return; }
+    if(e.ctrlKey && e.altKey && e.key && e.key.toLowerCase()==='a'){ tryOpen(e); return; }
+    if(qDown && e.code==='KeyL'){ tryOpen(e); qDown=false; }
+  });
+  document.addEventListener('keyup',e=>{ if(e.code==='KeyQ') qDown=false; });
+  // fallback: 3 cliques rápidos na logo BERIT
+  let clicks=0, timer=null;
+  const brand=document.querySelector('.brand');
+  if(brand){ brand.addEventListener('click',()=>{ clicks++; clearTimeout(timer); timer=setTimeout(()=>clicks=0,1200); if(clicks>=3){ clicks=0; if(isAdm()) admLogout(); else openAdmModal(); }}); }
+  // garante modal existe
+  window.openAdmModal = openAdmModal;
+})();
+
+/* ---------- EVENTOS ---------- */
+const defaultEventos=[];
+function getEventos(){ try{ const v=JSON.parse(localStorage.getItem('berit_eventos')||'null'); if(Array.isArray(v)) return v; return defaultEventos }catch{return defaultEventos} }
+function saveEventos(a){ localStorage.setItem('berit_eventos', JSON.stringify(a)); }
+// migracao v4: limpa demos antigos para mostrar animacao vazia
+try{ if(!localStorage.getItem('berit_mig_v4')){ localStorage.removeItem('berit_eventos'); localStorage.removeItem('berit_retiros'); localStorage.setItem('berit_mig_v4','1'); } }catch{}
+function fmtData(iso){
+  try{ const d=new Date(iso); return d.toLocaleString('pt-BR',{weekday:'short',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) }catch{return iso}
+}
+function renderEventos(){
+  const feed=document.getElementById('eventos-feed'), empty=document.getElementById('eventos-empty');
+  if(!feed) return;
+  const adm=isAdm();
+  let evs=getEventos().slice().sort((a,b)=> new Date(a.data)-new Date(b.data));
+  feed.innerHTML='';
+  if(!evs.length){
+     if(empty){ empty.style.display='block'; requestAnimationFrame(()=>replayEmpty('eventos')); }
+     return;
+   }
+  if(empty) empty.style.display='none';
+  evs.forEach(ev=>{
+    const card=document.createElement('div');
+    card.style.cssText='background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:18px;overflow:hidden;display:flex;flex-direction:column';
+    const isPast=new Date(ev.data) < new Date();
+    card.innerHTML=`
+      <div style="height:160px;overflow:hidden;background:#000"><img src="${ev.img}" alt="${ev.titulo}" style="width:100%;height:100%;object-fit:cover;opacity:${isPast?'.5':'1'}"></div>
+      <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:8px">
+        <span style="align-self:flex-start;background:${isPast?'#333':'linear-gradient(120deg,var(--amber),#E07B00)'};color:${isPast?'#aaa':'#1a1000'};font-family:'Montserrat';font-size:10px;font-weight:800;letter-spacing:1px;padding:5px 10px;border-radius:999px">${isPast?'ENCERRADO':'📅 '+fmtData(ev.data)}</span>
+        <h3 style="font-size:15px">${ev.titulo}</h3>
+        <p style="color:var(--muted);font-size:13px">📍 ${ev.local}</p>
+        <p style="color:var(--muted);font-size:13.5px;flex:1">${ev.desc}</p>
+        ${adm?`<div style="display:flex;gap:8px;margin-top:8px"><button onclick="deleteEvento('${ev.id}')" style="flex:1;background:rgba(196,30,58,.12);border:1px solid rgba(196,30,58,.3);color:#ff8a8a;border-radius:999px;padding:8px;font-size:12px;cursor:pointer">🗑️ Apagar</button></div>`:''}
+      </div>`;
+    feed.appendChild(card);
+  });
+}
+async function addEvento(){
+  if(!isAdm()) return alert('Só ADM');
+  const titulo=document.getElementById('ev-titulo').value.trim(), data=document.getElementById('ev-data').value, local=document.getElementById('ev-local').value.trim(), desc=document.getElementById('ev-desc').value.trim();
+  let img=document.getElementById('ev-img').value.trim();
+  const file=document.getElementById('ev-file').files[0];
+  if(file) img=await new Promise(r=>{ const fr=new FileReader(); fr.onload=e=>r(e.target.result); fr.readAsDataURL(file); });
+  if(!titulo||!data) return alert('Preencha título e data');
+  if(!img) img='logo.png';
+  const evs=getEventos(); evs.push({id:Date.now().toString(),titulo,data,local:local||'A definir',desc:desc||'',img});
+  saveEventos(evs);
+  document.getElementById('ev-titulo').value=''; document.getElementById('ev-data').value=''; document.getElementById('ev-local').value=''; document.getElementById('ev-desc').value=''; document.getElementById('ev-img').value=''; document.getElementById('ev-file').value='';
+  renderEventos();
+}
+function deleteEvento(id){ if(!isAdm()||!confirm('Apagar evento?')) return; saveEventos(getEventos().filter(e=>e.id!==id)); renderEventos(); }
+/* ---------- RETIROS ---------- */
+const defaultRetiros=[];
+function getRetiros(){ try{ const v=JSON.parse(localStorage.getItem('berit_retiros')||'null'); if(Array.isArray(v)) return v; return defaultRetiros }catch{return defaultRetiros} }
+function saveRetiros(a){ localStorage.setItem('berit_retiros', JSON.stringify(a)); }
+function renderRetiros(){
+  const feed=document.getElementById('retiros-feed'), empty=document.getElementById('retiros-empty');
+  if(!feed) return;
+  const adm=isAdm();
+  let rts=getRetiros().slice().sort((a,b)=> new Date(a.data)-new Date(b.data));
+  feed.innerHTML='';
+  if(!rts.length){
+     if(empty){ empty.style.display='block'; requestAnimationFrame(()=>replayEmpty('retiros')); }
+     return;
+   }
+  if(empty) empty.style.display='none';
+  rts.forEach(rt=>{
+    const card=document.createElement('div');
+    card.style.cssText='background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:18px;overflow:hidden;display:flex;flex-direction:column';
+    const isPast=new Date(rt.data) < new Date();
+    card.innerHTML=`
+      <div style="height:180px;overflow:hidden;background:#000"><img src="${rt.img}" alt="${rt.titulo}" style="width:100%;height:100%;object-fit:cover;opacity:${isPast?'.5':'1'}"></div>
+      <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:8px">
+        <span style="align-self:flex-start;background:${isPast?'#333':'linear-gradient(120deg,var(--amber),#E07B00)'};color:${isPast?'#aaa':'#1a1000'};font-family:'Montserrat';font-size:10px;font-weight:800;letter-spacing:1px;padding:5px 10px;border-radius:999px">${isPast?'ENCERRADO':'⛰️ '+fmtData(rt.data)}</span>
+        <h3 style="font-size:15px">${rt.titulo}</h3>
+        <p style="color:var(--gold);font-size:12px;font-weight:700">📍 ${rt.local} • ${rt.vagas}</p>
+        <p style="color:var(--muted);font-size:13.5px;flex:1">${rt.desc}</p>
+        ${adm?`<button onclick="deleteRetiro('${rt.id}')" style="background:rgba(196,30,58,.12);border:1px solid rgba(196,30,58,.3);color:#ff8a8a;border-radius:999px;padding:8px;font-size:12px;cursor:pointer;margin-top:8px">🗑️ Apagar</button>`:''}
+      </div>`;
+    feed.appendChild(card);
+  });
+}
+async function addRetiro(){
+  if(!isAdm()) return alert('Só ADM');
+  const titulo=document.getElementById('rt-titulo').value.trim(), data=document.getElementById('rt-data').value, local=document.getElementById('rt-local').value.trim(), vagas=document.getElementById('rt-vagas').value.trim(), desc=document.getElementById('rt-desc').value.trim();
+  let img=document.getElementById('rt-img').value.trim();
+  const file=document.getElementById('rt-file').files[0];
+  if(file) img=await new Promise(r=>{ const fr=new FileReader(); fr.onload=e=>r(e.target.result); fr.readAsDataURL(file); });
+  if(!titulo||!data) return alert('Preencha título e data');
+  if(!img) img='logo.png';
+  const rts=getRetiros(); rts.push({id:Date.now().toString(),titulo,data,local:local||'A definir',vagas:vagas||'',desc:desc||'',img});
+  saveRetiros(rts);
+  document.getElementById('rt-titulo').value=''; document.getElementById('rt-data').value=''; document.getElementById('rt-local').value=''; document.getElementById('rt-vagas').value=''; document.getElementById('rt-desc').value=''; document.getElementById('rt-img').value=''; document.getElementById('rt-file').value='';
+  renderRetiros();
+}
+function deleteRetiro(id){ if(!isAdm()||!confirm('Apagar retiro?')) return; saveRetiros(getRetiros().filter(r=>r.id!==id)); renderRetiros(); }
+
+/* bolinhas douradas no site inteiro */
 (function(){
   const c=document.getElementById('stars'),x=c.getContext('2d');let W,H;const P=[];
-  function size(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight}
+  function size(){
+    const dpr=window.devicePixelRatio||1;
+    W=c.width=c.offsetWidth*dpr; H=c.height=c.offsetHeight*dpr;
+    x.setTransform(dpr,0,0,dpr,0,0);
+    W=c.offsetWidth; H=c.offsetHeight;
+  }
   size();addEventListener('resize',size);
-  for(let i=0;i<70;i++)P.push({x:Math.random(),y:Math.random(),r:Math.random()*1.8+.4,s:Math.random()*.0006+.0002,o:Math.random()*.5+.15});
+  const N=140;
+  for(let i=0;i<N;i++)P.push({
+    x:Math.random(), y:Math.random(),
+    r:Math.random()*2.2+0.6,
+    s:Math.random()*0.0007+0.00015,
+    o:Math.random()*0.55+0.25,
+    tw:Math.random()*Math.PI*2, ts:Math.random()*0.02+0.008,
+    dx: (Math.random()-0.5)*0.0004
+  });
   (function loop(){
     x.clearRect(0,0,W,H);
-    P.forEach(p=>{p.y-=p.s;if(p.y<0)p.y=1;
-      x.globalAlpha=p.o;x.fillStyle='#FFB627';
-      x.beginPath();x.arc(p.x*W,p.y*H,p.r,0,7);x.fill()});
+    P.forEach(p=>{
+      p.y-=p.s; p.x+=p.dx; p.tw+=p.ts;
+      if(p.y<0) {p.y=1; p.x=Math.random();}
+      if(p.x<0) p.x=1; if(p.x>1) p.x=0;
+      const twinkle = 0.65 + 0.35*Math.sin(p.tw);
+      x.globalAlpha=p.o*twinkle;
+      x.fillStyle='#E8A400';
+      x.shadowBlur=6; x.shadowColor='rgba(232,164,0,.7)';
+      x.beginPath(); x.arc(p.x*W,p.y*H,p.r,0,Math.PI*2); x.fill();
+      x.shadowBlur=0;
+      // brilho central menor
+      x.globalAlpha=p.o*twinkle*0.9;
+      x.fillStyle='#FFD166';
+      x.beginPath(); x.arc(p.x*W,p.y*H,p.r*0.45,0,Math.PI*2); x.fill();
+    });
     x.globalAlpha=1;requestAnimationFrame(loop);
   })();
 })();

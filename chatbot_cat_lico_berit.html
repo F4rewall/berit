@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeritBot - Grupo de Jovens Berit</title>
+    <title>Elo - Grupo de Jovens Berit</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -39,16 +39,13 @@
     <header class="bg-gradient-to-r from-amber-700 via-amber-800 to-slate-900 border-b border-amber-600/30 px-4 py-3 flex items-center justify-between shadow-lg z-10">
         <div class="flex items-center space-x-3">
             <div class="relative">
-                <div class="w-11 h-11 rounded-full bg-amber-500/20 border-2 border-amber-400 flex items-center justify-center text-amber-300 font-bold text-lg shadow-inner">
-                    <i class="fa-solid fa-dove"></i>
+                <div class="w-11 h-11 rounded-full bg-black border-2 border-amber-400 flex items-center justify-center overflow-hidden shadow-inner">
+                    <img src="logoberitbot.jpg" alt="Elo" class="w-full h-full object-cover">
                 </div>
                 <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
             </div>
             <div>
-                <h1 class="font-bold text-base text-white flex items-center gap-2">
-                    BeritBot <span class="text-xs px-2 py-0.5 bg-amber-500/20 text-amber-300 rounded-full border border-amber-500/30 font-medium">IA Católica</span>
-                </h1>
-                <p class="text-xs text-amber-200/70">Paróquia Santo Antônio de Lisboa (Aureny III)</p>
+                <h1 class="font-bold text-base text-white">Elo</h1>
             </div>
         </div>
         <div class="flex items-center space-x-2">
@@ -63,13 +60,13 @@
         
         <!-- Mensagem de Boas-Vindas do Bot -->
         <div class="flex items-start space-x-3 max-w-2xl">
-            <div class="w-9 h-9 rounded-full bg-amber-600 flex-shrink-0 flex items-center justify-center text-white font-bold shadow-md">
-                <i class="fa-solid fa-cross text-sm"></i>
+            <div class="w-9 h-9 rounded-full bg-black border border-amber-500 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-md">
+                <img src="logoberitbot.jpg" alt="Elo" class="w-full h-full object-cover">
             </div>
             <div class="space-y-2">
                 <div class="bg-slate-800 border border-slate-700/60 rounded-2xl rounded-tl-sm p-4 text-slate-200 shadow-sm leading-relaxed text-sm sm:text-base">
                     <p class="font-semibold text-amber-400 mb-1">A Pax Christi! 🙏 Seja muito bem-vindo(a)!</p>
-                    <p>Eu sou o <strong>BeritBot</strong>, assistente do <strong>Grupo de Jovens Berit</strong> (Paróquia Santo Antônio de Lisboa - Jardim Aureny III). Respondo de forma bem direta e objetiva, mas se quiser que eu explique mais, é só pedir!</p>
+                    <p>Eu sou o <strong>Elo</strong>, assistente do <strong>Grupo de Jovens Berit</strong> (Paróquia Santo Antônio de Lisboa - Jardim Aureny III). Respondo de forma bem direta e objetiva, mas se quiser que eu explique mais, é só pedir!</p>
                     <p class="mt-2 text-slate-300">Como posso te ajudar hoje?</p>
                 </div>
                 <span class="text-[11px] text-slate-500 block px-1">Agora mesmo</span>
@@ -114,15 +111,12 @@
                 <i class="fa-solid fa-paper-plane text-base"></i>
             </button>
         </form>
-        <p class="text-[11px] text-center text-slate-500 mt-2">
-            BeritBot • Grupo de Jovens Berit • Fiel ao Magistério e à Tradição da Igreja Católica.
-        </p>
     </footer>
 
     <script>
         let chatHistory = [];
 
-        const systemPrompt = `Você é o BeritBot, assistente virtual do "Grupo de Jovens Berit" da Paróquia Santo Antônio de Lisboa, localizada no Jardim Aureny III (Palmas - TO).
+        const systemPrompt = `Você é o Elo, assistente virtual do "Grupo de Jovens Berit" da Paróquia Santo Antônio de Lisboa, localizada no Jardim Aureny III (Palmas - TO).
 O Instagram oficial do grupo é @grupo_berit.
 Possui profundo conhecimento da fé católica, Magistério, Catecismo (CIC) e Tradição, além de poder buscar informações atualizadas na internet se necessário.
 
@@ -153,8 +147,8 @@ DIRETRIZ DE RESPOSTA (MUITO IMPORTANTE):
             chatHistory = [];
             chatContainer.innerHTML = `
                 <div class="flex items-start space-x-3 max-w-2xl">
-                    <div class="w-9 h-9 rounded-full bg-amber-600 flex-shrink-0 flex items-center justify-center text-white font-bold shadow-md">
-                        <i class="fa-solid fa-cross text-sm"></i>
+                    <div class="w-9 h-9 rounded-full bg-black border border-amber-500 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-md">
+                        <img src="logoberitbot.jpg" alt="Elo" class="w-full h-full object-cover">
                     </div>
                     <div class="space-y-2">
                         <div class="bg-slate-800 border border-slate-700/60 rounded-2xl rounded-tl-sm p-4 text-slate-200 shadow-sm leading-relaxed text-sm sm:text-base">
@@ -194,7 +188,17 @@ DIRETRIZ DE RESPOSTA (MUITO IMPORTANTE):
             } catch (error) {
                 console.error("Erro ao chamar a API:", error);
                 document.getElementById(loadingId).remove();
-                const errorMsg = "Desculpe, tive um pequeno problema de conexão. Poderia repetir?";
+                let errorMsg = "Desculpe, tive um pequeno problema de conexão. Poderia repetir?";
+                if (error.message === "CHAVE_API_AUSENTE") {
+                    errorMsg = "⚠️ Elo temporariamente indisponível. Tente novamente em instantes.";
+                } else if (error.message.includes("CHAVE_INVALIDA")) {
+                    errorMsg = "⚠️ Chave de API rejeitada pelo Google (" + error.message + "). Verifique se a chave está correta e se a API Generative Language está ativada em https://console.cloud.google.com";
+                } else if (error.message === "LIMITE_COTA") {
+                    const wait = error.retryAfter || 30;
+                    errorMsg = `⏳ Limite gratuito do Gemini atingido (429). Aguarde ${wait}s e tente novamente.`;
+                } else {
+                    errorMsg = "Desculpe, tive um problema de conexão: " + error.message.slice(0,200) + "\nTente novamente em instantes.";
+                }
                 await typedMessage(errorMsg);
                 chatHistory.pop();
             } finally {
@@ -218,8 +222,8 @@ DIRETRIZ DE RESPOSTA (MUITO IMPORTANTE):
                 .replace(/\n/g, '<br>');
 
             messageDiv.innerHTML = `
-                <div class="w-9 h-9 rounded-full ${isUser ? 'bg-amber-500 text-slate-950' : 'bg-amber-600 text-white'} flex-shrink-0 flex items-center justify-center font-bold shadow-md">
-                    <i class="fa-solid ${isUser ? 'fa-user' : 'fa-cross'} text-sm"></i>
+                <div class="w-9 h-9 rounded-full ${isUser ? 'bg-amber-500 text-slate-950' : 'bg-black border border-amber-500'} flex-shrink-0 flex items-center justify-center font-bold shadow-md overflow-hidden">
+                    ${isUser ? '<i class="fa-solid fa-user text-sm"></i>' : '<img src="logoberitbot.jpg" alt="Elo" class="w-full h-full object-cover">'}
                 </div>
                 <div class="space-y-1">
                     <div class="${isUser ? 'bg-amber-600/90 text-white rounded-tr-sm' : 'bg-slate-800 border border-slate-700/60 text-slate-200 rounded-tl-sm'} rounded-2xl p-4 shadow-sm leading-relaxed text-sm sm:text-base">
@@ -239,8 +243,8 @@ DIRETRIZ DE RESPOSTA (MUITO IMPORTANTE):
             const timeString = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
             messageDiv.innerHTML = `
-                <div class="w-9 h-9 rounded-full bg-amber-600 flex-shrink-0 flex items-center justify-center text-white font-bold shadow-md">
-                    <i class="fa-solid fa-cross text-sm"></i>
+                <div class="w-9 h-9 rounded-full bg-black border border-amber-500 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-md">
+                    <img src="logoberitbot.jpg" alt="Elo" class="w-full h-full object-cover">
                 </div>
                 <div class="space-y-1">
                     <div class="bg-slate-800 border border-slate-700/60 text-slate-200 rounded-2xl rounded-tl-sm p-4 shadow-sm leading-relaxed text-sm sm:text-base message-content">
@@ -287,8 +291,8 @@ DIRETRIZ DE RESPOSTA (MUITO IMPORTANTE):
             loadingDiv.id = id;
             loadingDiv.className = 'flex items-start space-x-3 max-w-2xl';
             loadingDiv.innerHTML = `
-                <div class="w-9 h-9 rounded-full bg-amber-600 flex-shrink-0 flex items-center justify-center text-white font-bold shadow-md">
-                    <i class="fa-solid fa-cross text-sm"></i>
+                <div class="w-9 h-9 rounded-full bg-black border border-amber-500 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-md">
+                    <img src="logoberitbot.jpg" alt="Elo" class="w-full h-full object-cover">
                 </div>
                 <div class="bg-slate-800 border border-slate-700/60 rounded-2xl rounded-tl-sm p-4 text-slate-400 shadow-sm flex items-center space-x-2">
                     <div class="w-2 h-2 bg-amber-400 rounded-full animate-bounce" style="animation-delay: 0s"></div>
@@ -310,17 +314,17 @@ DIRETRIZ DE RESPOSTA (MUITO IMPORTANTE):
         }
 
         async function callGeminiAPI(history, retries = 3, delay = 1000) {
-            const apiKey = (window.BERIT_API_KEY || "");
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-
+            let apiKey = (window.BERIT_API_KEY || "").trim();
+            apiKey = apiKey.replace(/^["']|["']$/g, "");
+            if (!apiKey || apiKey === "SUA_CHAVE_AQUI" || apiKey.length < 20) throw new Error("CHAVE_API_AUSENTE");
+            const model = "gemini-3.6-flash";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+            const useSearch = new URLSearchParams(window.location.search).has('search');
             const payload = {
                 contents: history,
-                tools: [{ "google_search": {} }],
-                systemInstruction: {
-                    parts: [{ text: systemPrompt }]
-                }
+                ...(useSearch ? { tools: [{ "google_search": {} }] } : {}),
+                systemInstruction: { parts: [{ text: systemPrompt }] }
             };
-
             for (let i = 0; i < retries; i++) {
                 try {
                     const response = await fetch(apiUrl, {
@@ -328,26 +332,36 @@ DIRETRIZ DE RESPOSTA (MUITO IMPORTANTE):
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
-
                     if (!response.ok) {
-                        throw new Error(`Erro HTTP: ${response.status}`);
+                        const errBody = await response.text();
+                        console.error("Erro API:", response.status, errBody);
+                        if (response.status === 400 || response.status === 403) throw new Error(`CHAVE_INVALIDA (${response.status})`);
+                        if (response.status === 429) {
+                            let wait = 20;
+                            try { const j = JSON.parse(errBody); const d = j.error?.details?.find(x=>x['@type']?.includes('RetryInfo'))?.retryDelay; if(d) wait = parseInt(d) || 20; } catch {}
+                            if (i < retries - 1) { await new Promise(r => setTimeout(r, wait * 1000)); continue; }
+                            const e = new Error("LIMITE_COTA"); e.retryAfter = wait; throw e;
+                        }
+                        throw new Error(`Erro HTTP: ${response.status} - ${errBody.slice(0,300)}`);
                     }
-
                     const result = await response.json();
                     const candidate = result.candidates?.[0];
-
-                    if (candidate && candidate.content?.parts?.[0]?.text) {
-                        return candidate.content.parts[0].text;
-                    } else {
-                        throw new Error("Resposta inválida da API.");
-                    }
+                    if (candidate && candidate.content?.parts?.[0]?.text) return candidate.content.parts[0].text;
+                    else if (result.candidates?.[0]?.finishReason === 'SAFETY') return "Sua pergunta foi bloqueada pelo filtro de segurança. Tente reformular.";
+                    else throw new Error("Resposta inválida da API.");
                 } catch (error) {
+                    if (error.message.includes("CHAVE")) throw error;
+                    if (error.message === "LIMITE_COTA") throw error;
                     if (i === retries - 1) throw error;
                     await new Promise(resolve => setTimeout(resolve, delay));
                     delay *= 2;
                 }
             }
         }
+        window.addEventListener('DOMContentLoaded', () => {
+            const k = (window.BERIT_API_KEY || "").trim();
+            if (!k || k.length < 20) console.warn("Elo: sem chave válida em berit-config.js");
+        });
     </script>
 </body>
 </html>
