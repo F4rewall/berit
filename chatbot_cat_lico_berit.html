@@ -316,8 +316,18 @@ DIRETRIZ DE RESPOSTA (MUITO IMPORTANTE):
         async function callGeminiAPI(history, retries = 3, delay = 1000) {
             let apiKey = (window.BERIT_API_KEY || "").trim();
             apiKey = apiKey.replace(/^["']|["']$/g, "");
+            // Fallback Vercel: busca chave via /api/key se berit-config.js estiver vazio (evita commit de segredo no GitHub)
+            if ((!apiKey || apiKey.length < 20) && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+                try {
+                    const r = await fetch('/api/key');
+                    if (r.ok) {
+                        const j = await r.json();
+                        if (j.key) { apiKey = (j.key || "").trim(); window.BERIT_API_KEY = apiKey; }
+                    }
+                } catch {}
+            }
             if (!apiKey || apiKey === "SUA_CHAVE_AQUI" || apiKey.length < 20) throw new Error("CHAVE_API_AUSENTE");
-            const model = "gemini-3.6-flash";
+            const model = "gemini-1.5-flash";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
             const useSearch = new URLSearchParams(window.location.search).has('search');
             const payload = {
